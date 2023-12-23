@@ -1,20 +1,21 @@
 import Product from "../models/Product";
-import Button from "./Button";
-import { useDispatch } from "react-redux";
-import { addTOCart } from "../redux-store/actions";
+import { useNavigate } from "react-router-dom";
 type ProductCardProps = {
   product: Product;
 };
 
 const ProductCard = ({ product }: ProductCardProps) => {
-  const dispatch = useDispatch();
+  const navigate = useNavigate();
 
-  const addingToCart = () => {
-    dispatch(addTOCart(product));
+  const gotToProduct = () => {
+    navigate(`/product/${product.id}`);
   };
 
   return (
-    <div className="rounded-2xl w-72 h-content overflow-hidden bg-slate-200 border-2">
+    <div
+      onClick={gotToProduct}
+      className="rounded-2xl w-72 h-88 overflow-hidden bg-slate-200 border-2 cursor-pointer"
+    >
       <div className="w-full h-44 overflow-hidden ">
         <img
           src={product.image}
@@ -22,8 +23,8 @@ const ProductCard = ({ product }: ProductCardProps) => {
           className="w-full h-full object-cover"
         />
       </div>
-      <div className="h-content px-4 flex flex-col gap-2 justify-between">
-        <p className="my-2 text-lg font-bold line-clamp-1 text-center">
+      <div className="h-44 px-4 flex flex-col gap-2 justify-between">
+        <p className="my-2 text-lg font-bold line-clamp-2 text-center">
           {product.title}
         </p>
         <div className="flex justify-between px-3">
@@ -33,8 +34,12 @@ const ProductCard = ({ product }: ProductCardProps) => {
           </span>
           <span className="text-slate-600">Rating: {product.rating.rate}</span>
         </div>
-        <button onClick={addingToCart}>send me to cart</button>
-        <Button classname="my-3" type="button" text="Add To Card" />
+        <button
+          onClick={gotToProduct}
+          className="w-full text-blue-500 border-2 border-blue-500 hover:bg-blue-500 hover:text-white py-2 mt-4 mb-2 rounded-lg"
+        >
+          View Product
+        </button>
       </div>
     </div>
   );

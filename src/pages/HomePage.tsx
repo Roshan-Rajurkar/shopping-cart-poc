@@ -15,7 +15,7 @@ const HomePage = () => {
 
   return (
     <div className="w-full">
-      <p>{carts.length}</p>
+      <p>Your cart : {carts.length}</p>
       <h1 className="font-bold mb-10 text-center">All Available Products</h1>
       <ProductList products={products} />
     </div>

@@ -1,6 +1,6 @@
 import Product from "../models/Product";
 
-export const addTOCart = (
+export const addToCart = (
   newCart: Product
 ): {
   type: string;
