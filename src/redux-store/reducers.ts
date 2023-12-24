@@ -1,21 +1,17 @@
-import Product from "../models/Product";
+import { CartAppState } from "../models/AppStates";
 
-export type AppState = {
-  carts: Product[];
-};
-
-const initialState: AppState = {
+const initialState: CartAppState = {
   carts: [],
 };
 
-const cartReducer = (state = initialState, action: any) => {
+export const cartReducer = (state = initialState, action: any) => {
   switch (action.type) {
     case "ADD_TO_CART":
-      return state;
+      return {
+        carts : [...state.carts, action.payload]
+      };
 
     default:
       return state;
   }
 };
-
-export default cartReducer;

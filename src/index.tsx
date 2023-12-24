@@ -5,10 +5,12 @@ import App from "./App";
 import reportWebVitals from "./reportWebVitals";
 import { QueryClient, QueryClientProvider } from "react-query";
 import { Provider } from "react-redux";
-import { createStore } from "redux";
-import cartReducer from "./redux-store/reducers";
+import {  createStore } from "redux";
+import {cartReducer} from "./redux-store/reducers";
 
-const store = createStore(cartReducer);
+const store = createStore(
+    cartReducer
+);
 
 const queryClient = new QueryClient();
 const root = ReactDOM.createRoot(

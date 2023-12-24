@@ -7,7 +7,7 @@ type ProductListComponentProps = {
 
 const ProductCardList = ({ products }: ProductListComponentProps) => {
   return (
-    <div className="flex flex-wrap justify-center gap-10">
+    <div className="flex flex-wrap justify-start gap-10">
       {products.map((product) => {
         return <ProductCard key={product.title} product={product} />;
       })}

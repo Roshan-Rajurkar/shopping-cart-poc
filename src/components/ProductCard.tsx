@@ -1,5 +1,6 @@
 import Product from "../models/Product";
 import { useNavigate } from "react-router-dom";
+
 type ProductCardProps = {
   product: Product;
 };
@@ -30,9 +31,13 @@ const ProductCard = ({ product }: ProductCardProps) => {
         <div className="flex justify-between px-3">
           <span className="text-slate-600">
             Price: &#8377;
-            <span className="font-bold">{product.price}</span>
+            <span className="font-bold text-slate-800">{product.price}</span>
           </span>
-          <span className="text-slate-600">Rating: {product.rating.rate}</span>
+          <span className="text-slate-600">
+            <span className="text-slate-600">
+          Rating:&nbsp;
+          </span> 
+          {product.rating.rate}/5</span>
         </div>
         <button
           onClick={gotToProduct}

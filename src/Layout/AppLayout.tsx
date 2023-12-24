@@ -1,13 +1,10 @@
 import Header from "../components/Header";
 import { Outlet } from "react-router-dom";
-import { UserContextProvider } from "../UserContext/userContextProvider";
 const AppLayout = () => {
   return (
-    <div className="w p-4 h-content m-auto lg:w-3/4 lg:p-0 relative">
-      <UserContextProvider>
+    <div className="w-3/4 p-4 h-content m-auto lg:w-3/4 lg:p-0 relative">
         <Header />
-      </UserContextProvider>
-      <main className="mt-28 flex justify-center">
+      <main className="flex justify-center mt-20 mb-10">
         <Outlet />
       </main>
     </div>

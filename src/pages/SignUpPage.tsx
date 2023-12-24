@@ -4,11 +4,10 @@ import { useForm } from "react-hook-form";
 import { yupResolver } from "@hookform/resolvers/yup";
 import { object, string } from "yup";
 import { NavLink } from "react-router-dom";
-import { UserContext } from "../UserContext/userContextProvider";
-import { useContext } from "react";
+import { useState } from "react";
 
 const SignupSchema = object({
-  username: string().required("Usename is required").min(6),
+  username: string().required("Username is required").min(6),
   email: string()
     .required("Email is required")
     .email("Please enter a valid email"),
@@ -18,28 +17,29 @@ const SignupSchema = object({
 });
 
 const SignUpPage = () => {
-  const userInfo = useContext(UserContext);
 
+const [success, setSuccess] = useState(false)
   const {
     register,
     handleSubmit,
     formState: { errors },
+    reset
   } = useForm({
     resolver: yupResolver(SignupSchema),
   });
 
   const onSubmit = handleSubmit((data) => {
-    console.log(data);
-    const { username, email, password } = data;
-    console.log(username, email, password);
-    userInfo?.setUser(username, email, password);
-    console.log("user info updates", userInfo);
+    if(data)
+    {
+      setSuccess(true);
+      reset();
+    }
   });
 
   return (
     <form
       onSubmit={onSubmit}
-      className="w-content h-content flex flex-col items-center border-2 rounded-lg px-8 py-5 mt-24"
+      className="w-content h-content flex flex-col items-center border-2 rounded-lg px-8 py-5 mt-8"
     >
       <img
         src="https://img.freepik.com/free-vector/businessman-character-avatar-isolated_24877-60111.jpg?w=740&t=st=1703311448~exp=1703312048~hmac=010cd38ca1a0f67906611ce062f6ddda80f1bde925fa6e74510bf5cd4d9653c9"
@@ -88,9 +88,9 @@ const SignUpPage = () => {
           </span>
         )}
       </div>
-      <Button type="submit" text="Sign Up" />
+      <Button type="submit" text={success ? "Sign Up Successfully✅" : "Sign Up"} />
       <p className="mt-2">
-        Don't have account yet,&nbsp;
+        Already have an account,&nbsp;
         <NavLink to="/login" className="text-sm text-blue-500 underline">
           Log In
         </NavLink>

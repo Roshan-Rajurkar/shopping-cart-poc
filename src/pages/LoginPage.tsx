@@ -3,7 +3,8 @@ import Button from "../components/Button";
 import { useForm } from "react-hook-form";
 import { yupResolver } from "@hookform/resolvers/yup";
 import { object, string } from "yup";
-import { NavLink } from "react-router-dom";
+import { NavLink} from "react-router-dom";
+import { useState } from "react";
 
 const LoginSchema = object({
   email: string()
@@ -15,22 +16,28 @@ const LoginSchema = object({
 });
 
 const LoginPage = () => {
+  const [success, setSuccess] = useState(false)
   const {
     register,
     handleSubmit,
+    reset,
     formState: { errors },
   } = useForm({
     resolver: yupResolver(LoginSchema),
   });
 
   const onSubmit = handleSubmit((data) => {
-    console.log(data);
+    if(data){
+      setSuccess(true);
+      reset();
+    }
+
   });
 
   return (
     <form
       onSubmit={onSubmit}
-      className="w-content h-content flex flex-col items-center border-2 rounded-lg px-8 py-5 mt-24"
+      className="w-content h-content flex flex-col items-center border-2 rounded-lg px-8 py-5 mt-8"
     >
       <img
         src="https://img.freepik.com/free-psd/3d-illustration-person-with-sunglasses_23-2149436188.jpg?w=740&t=st=1703311427~exp=1703312027~hmac=45f6bb61af90f8b812e741e5538842d50f2b2a2e9ab2f79faf40e615888449de"
@@ -38,7 +45,7 @@ const LoginPage = () => {
         className="w-24 h-24 rounded-full border-2 "
       />
 
-      <h1 className="my-2 font-bold text-2xl text-blue-800">Welcome, Log In</h1>
+      <h1 className="my-2 font-bold text-2xl text-blue-800">Log In</h1>
       <div className="flex flex-col">
         <Input
           type="email"
@@ -65,7 +72,9 @@ const LoginPage = () => {
           </span>
         )}
       </div>
-      <Button type="submit" text="Log In" />
+
+
+      <Button type="submit" text={success ? "login successfully✅" : "Log In"} />
       <p className="mt-2">
         Don't have account yet,&nbsp;
         <NavLink to="/signup" className="text-sm text-blue-500 underline">
